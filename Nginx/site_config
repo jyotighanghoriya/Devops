@@ -1,0 +1,11 @@
+i532616@ubuntu:/etc/nginx/conf.d$ ls
+wisdompetnet.local.conf
+i532616@ubuntu:/etc/nginx/conf.d$ cat wisdompetnet.local.conf 
+server{
+	listen 80;
+	root /var/www/html/wisdompetmed.local;
+}
+------------------------------------------------------------------------
+i532616@ubuntu:/var/www/html/wisdompetmed.local$ cat index.html 
+Okkk.. So finally. This is it. Wowow!! Jyoti Ghanghoriya
+------------------------------------------------------------------------
