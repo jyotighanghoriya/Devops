@@ -3,8 +3,8 @@ pipeline{
     stages{
         stage('verify branch'){
             steps{
-                pwd
-                ls
+                sh pwd
+                sh ls
             }
         }
     }
