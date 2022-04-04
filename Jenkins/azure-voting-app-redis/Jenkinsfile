@@ -9,16 +9,15 @@ pipeline{
         stage('Docker Build'){
             steps{
                 powershell(script: 'ls')
-                // pwsh(script: 'docker images -a')
-                // pwsh(script: 'echo "after docker images command "')
-                // pwsh(script: """
-                // cd Jenkins/azure-voting-app-redis/azure-vote/
-                // ls
-                // docker images -a
-                // docker build -t jenkins-pipeling .
-                // docker images -a
-                // cd ..
-                // """)
+                powershell(script: 'docker images -a')
+                powershell(script: """
+                cd Jenkins/azure-voting-app-redis/azure-vote/
+                ls
+                docker images -a
+                docker build -t jenkins-pipeling .
+                docker images -a
+                cd ..
+                """)
             }
         }
     }
