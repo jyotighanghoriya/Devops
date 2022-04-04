@@ -8,7 +8,7 @@ pipeline{
         }
         stage('Docker Build'){
             steps{
-                pwsh(script: 'echo "before docker images command "')
+                pwsh 'ls'
                 // pwsh(script: 'docker images -a')
                 // pwsh(script: 'echo "after docker images command "')
                 // pwsh(script: """
