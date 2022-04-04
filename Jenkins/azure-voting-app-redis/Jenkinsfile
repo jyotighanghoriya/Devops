@@ -11,6 +11,7 @@ pipeline{
                 pwsh(script: 'docker images -a')
                 pwsh(script: """
                 cd Jenkins/azure-voting-app-redis/azure-vote/
+                ls
                 docker images -a
                 docker build -t jenkins-pipeling .
                 docker images -a
