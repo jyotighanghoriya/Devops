@@ -17,6 +17,7 @@ pipeline{
                 docker build -t jenkins-pipeling .
                 docker images -a
                 cd ..
+                echo "Testing branch demo"
                 """)
             }
         }
