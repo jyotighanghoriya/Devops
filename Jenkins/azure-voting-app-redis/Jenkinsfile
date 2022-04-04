@@ -3,7 +3,7 @@ pipeline{
     stages{
         stage('verify branch'){
             steps{
-                echo "Hello world"
+                echo "$GIT_BRANCH"
             }
         }
         stage('Docker Build'){
