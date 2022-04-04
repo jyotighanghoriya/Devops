@@ -6,5 +6,15 @@ pipeline{
                 echo "Hello world"
             }
         }
+        stage('Docker Build'){
+            pwsh(script: 'docker images -a')
+            pwsh(script: """
+            cd azure-vote/
+            docker images -a
+            docker build -t jenkins-pipeling .
+            docker images -a
+            cd ..
+            """)
+        }
     }
 }
