@@ -25,6 +25,7 @@ pipeline{
             steps{
                 powershell(script: """
                 ls
+                cd Jenkins/azure-voting-app-redis/azure-vote/
                 docker-compose up -d
                 #start app line missing!
                 cd Jenkins/azure-voting-app-redis/scripts
