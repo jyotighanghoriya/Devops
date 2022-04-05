@@ -29,7 +29,7 @@ pipeline{
                 #start app line missing!
                 cd Jenkins/azure-voting-app-redis/scripts
                 ls
-                ./test_constainer.ps1
+                test_constainer.ps1
                 cd ..
                 """
                 )
