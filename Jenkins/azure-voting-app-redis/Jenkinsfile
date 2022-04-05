@@ -28,7 +28,7 @@ pipeline{
                 ls
                 docker-compose up -d
                 #start app line missing!
-                ./scripts/test_constainer.ps1
+                Jenkins/azure-voting-app-redis/scripts/test_constainer.ps1
                 """
                 )
             }
@@ -44,7 +44,7 @@ pipeline{
         stage('Run Tests'){
             steps {
                 powershell(script: """
-                    pytest ./tests/test_sample.py
+                    pytest Jenkins/azure-voting-app-redis/tests/test_sample.py
                 """)
             }
         }
