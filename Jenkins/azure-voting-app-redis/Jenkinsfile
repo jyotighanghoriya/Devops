@@ -40,7 +40,7 @@ pipeline{
         }
         stage('Run Tests'){
             steps {
-                powershell(sript: """
+                powershell(script: """
                     pytest ./tests/test_sample.py
                 """)
             }
