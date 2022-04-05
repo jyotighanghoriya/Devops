@@ -31,6 +31,7 @@ pipeline{
                 cd Jenkins/azure-voting-app-redis/scripts
                 ls
                 ./test_constainer.ps1
+                cd ..
                 """
                 )
             }
@@ -46,7 +47,7 @@ pipeline{
         stage('Run Tests'){
             steps {
                 powershell(script: """
-                    cd Jenkins/azure-voting-app-redis/tests/
+                    cd tests/
                     ls
                     pytest test_sample.py
                 """)
