@@ -17,6 +17,48 @@ pipeline{
                 docker build -t jenkins-pipeling .
                 docker images -a
                 cd ..
+                echo "Testing branch demo"
+                """)
+            }
+        }
+        stage('start test app'){
+            steps{
+                powershell(script: """
+                ls
+                cd Jenkins/azure-voting-app-redis/azure-vote/
+                docker-compose up -d
+                #start app line missing!
+                cd ..
+                ls
+                cd scripts
+                ls
+                ./test_constainer.ps1
+                cd ..
+                """
+                )
+            }
+            post{
+                success {
+                    echo "App started successfully"
+                }
+                failure {
+                    echo "app failed to start"
+                }
+            }
+        }
+        stage('Run Tests'){
+            steps {
+                powershell(script: """
+                    cd Jenkins/azure-voting-app-redis/tests/
+                    ls
+                    pytest test_sample.py
+                """)
+            }
+        }
+        stage('stop Test'){
+            steps{
+                powershell(script: """
+                    docker-compose down
                 """)
             }
         }
