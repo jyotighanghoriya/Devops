@@ -52,13 +52,13 @@ pipeline{
                     cd Jenkins/azure-voting-app-redis/tests/
                     ls
                     python test_sample.py\
-                    cd ..
                 """)
             }
         }
         stage('stop Test'){
             steps{
                 powershell(script: """
+                    cd Jenkins/azure-voting-app-redis
                     docker-compose down
                 """)
             }
