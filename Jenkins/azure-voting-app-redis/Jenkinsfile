@@ -51,7 +51,7 @@ pipeline{
                 powershell(script: """
                     cd Jenkins/azure-voting-app-redis/tests/
                     ls
-                    pytest test_sample.py
+                    python test_sample.py
                 """)
             }
         }
