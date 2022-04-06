@@ -28,7 +28,9 @@ pipeline{
                 cd Jenkins/azure-voting-app-redis/azure-vote/
                 docker-compose up -d
                 #start app line missing!
-                cd Jenkins/azure-voting-app-redis/scripts
+                cd ..
+                ls
+                cd scripts
                 ls
                 test_constainer.ps1
                 cd ..
