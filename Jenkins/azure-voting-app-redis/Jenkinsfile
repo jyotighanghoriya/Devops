@@ -32,7 +32,7 @@ pipeline{
                 ls
                 cd scripts
                 ls
-                ./test_constainer.ps
+                .\test_constainer.ps1
                 cd ..
                 """
                 )
