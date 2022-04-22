@@ -1,3 +1,4 @@
+Basic config
 i532616@ubuntu:/etc/nginx/conf.d$ ls
 wisdompetnet.local.conf
 i532616@ubuntu:/etc/nginx/conf.d$ cat wisdompetnet.local.conf 
@@ -9,3 +10,65 @@ server{
 i532616@ubuntu:/var/www/html/wisdompetmed.local$ cat index.html 
 Okkk.. So finally. This is it. Wowow!! Jyoti Ghanghoriya
 ------------------------------------------------------------------------
+--------------------------------
+Full config
+--------------------------------
+server{
+	listen 80 default_server;
+	return 301 https://$server_addr$request_uri;
+}
+server{
+	listen 443 ssl default_server;
+	ssl_certificate /etc/ssl/certs/nginx.crt;
+	ssl_certificate_key /etc/ssl/private/nginx.key;
+
+	server_name wisdompetmed.local www.wisdompetmed.local;
+	index index.html index.htm index.php;
+	root /var/www/html/wisdompetmed.local;
+	access_log /var/log/nginx/wisdompetmed.local.access.log;
+	error_log /var/log/nginx/wisdompetmed.local.error.log;
+	location /{
+		try_files $uri $uri/ =404;
+	}
+	location ~ \.php$ {
+		include snippets/fastcgi-php.conf;
+		fastcgi_pass unix:/var/run/php/php7.4-fpm.sock;
+		fastcgi_intercept_errors on;
+	}
+	
+	location /appointments/ {
+		auth_basic "Authentication is Required";
+		auth_basic_user_file /etc/nginx/passwords;
+		location ~ \.php$ {
+                	include snippets/fastcgi-php.conf;
+                	fastcgi_pass unix:/var/run/php/php7.4-fpm.sock;
+                	fastcgi_intercept_errors on;
+        	}		
+		allow 192.168.0.0/16;
+		deny all; 
+	}	
+
+	location /images{
+		autoindex on;
+		access_log /var/log/nginx/wisdompetmed.local.images.access.log;
+		error_log /var/log/nginx/wisdompetmed.local.images.error.log;
+	}
+	error_page 403 /403.html;
+        location = /403.html{
+                internal;
+        }
+	error_page 404 /404.html;
+	location = /404.html{
+		internal;
+	}
+	error_page 500 502 503 504 /50x.html;
+	location = /50x.html{
+		internal;
+	}
+	location = /500{
+		fastcgi_pass unix:/this/will/fail;
+	}
+	location /deny/ {
+		deny all;
+	}
+}
