@@ -7,10 +7,10 @@ metadata:
   - resources-finalizer.argocd.argoproj.io
 spec:
   destination:
-    namespace: default
+    namespace: master-app
     server: https://kubernetes.default.svc
   project: default
   source:
     path: argocd/example/app-of-app/webapp-3
-    repoURL: https://github.com/foxutech/kubernetes.git
+    repoURL: https://github.com/jyotighanghoriya/Devops.git
     targetRevision: HEAD
