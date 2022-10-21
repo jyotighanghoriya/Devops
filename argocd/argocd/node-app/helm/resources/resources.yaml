@@ -1,0 +1,85 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: argoapptest
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: argoapptest
+  name: argoapptest-app
+  namespace: "argoapptest"
+spec:
+  ports:
+    - name: "api"
+      port: 3000
+      targetPort: 3000
+  selector:
+    app: argoapptest
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: argoapptest
+  name: argoapptest-app
+  namespace: "argoapptest"
+spec:
+  replicas: 3
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: argoapptest
+  template:
+    metadata:
+      annotations:
+        service: argoapptest-app-service
+      labels:
+        app: argoapptest
+    spec:
+      containers:
+      - name: argoapptest-app
+        env:
+        - name: PORT
+          value: "3000"
+        image: "motoskia/argo-app-1:v2"
+        imagePullPolicy: Always
+        livenessProbe:
+          tcpSocket:
+            port: 3000
+          failureThreshold: 3
+          successThreshold: 1
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 2
+        readinessProbe:
+          tcpSocket:
+            port: 3000
+          failureThreshold: 3
+          successThreshold: 1
+          periodSeconds: 10
+          timeoutSeconds: 2
+      restartPolicy: Always
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: gateway
+  namespace: argoapptest
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - host: argocd-argoapptest.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: argoapptest-app
+            port:
+              number: 3000

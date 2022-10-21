@@ -8,9 +8,9 @@ metadata:
 spec:
   destination:
     namespace: argocd
-    server: https://kubernetes.default.svc
+    server: https://127.0.0.1:8080/
   project: default
   source:
     path: argocd/my-apps/app-1
-    repoURL: https://gitlab.com/ayush-sharma/example-assets.git
+    repoURL: https://github.com/jyotighanghoriya/Devops.git
     targetRevision: HEAD

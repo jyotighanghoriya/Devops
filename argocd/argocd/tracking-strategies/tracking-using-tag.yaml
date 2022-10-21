@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata: 
+  name: track-tag
+  namespace: argocd
+spec:
+  destination:
+    namespace: track-commit
+    server: "https://kubernetes.default.svc"
+  project: default
+  source: 
+    path: k8s
+    repoURL: "https://github.com/foxutech/k8s-go-nginx.git"
+    targetRevision: v2
+    directory:
+      recurse: true
+  syncPolicy:
+    automated: {}
+    syncOptions:
+      - CreateNamespace=true
