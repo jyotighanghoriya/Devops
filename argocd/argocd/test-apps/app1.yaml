@@ -11,6 +11,6 @@ spec:
     server: https://kubernetes.default.svc
   project: default
   source:
-    path: argocd/example/app-of-app/webapp-1
+    path: argocd/argocd/example/app-of-app/webapp-1
     repoURL: https://github.com/jyotighanghoriya/Devops.git
     targetRevision: HEAD
