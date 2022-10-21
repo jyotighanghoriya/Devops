@@ -13,4 +13,4 @@ spec:
   source:
     path: argocd/argocd/example/app-of-app/webapp-1
     repoURL: https://github.com/jyotighanghoriya/Devops.git
-    targetRevision: HEAD
+    targetRevision: CIB-2300-testing
